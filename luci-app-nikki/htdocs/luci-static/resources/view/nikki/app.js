@@ -35,7 +35,7 @@ return view.extend({
 
         let m, s, o;
 
-        m = new form.Map('nikki', _('<p><strong><span style="color: rgb(41, 105, 176);">✦ Nikki</span> <span style="color: rgb(250, 197, 28);">Mod ✦</span></strong></p>'), `${_('Transparent Proxy with Mihomo on OpenWrt.')} <a href="https://github.com/nikkinikki-org/OpenWrt-nikki/wiki" target="_blank">${_('How To Use')}</a>`);
+        m = new form.Map('nikki');
 
         s = m.section(form.NamedSection, 'status', 'status', _('<p><strong>📣 Status</strong></p>'));
 
