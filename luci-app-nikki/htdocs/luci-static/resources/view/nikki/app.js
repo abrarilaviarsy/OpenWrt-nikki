@@ -37,7 +37,8 @@ return view.extend({
 
         m = new form.Map('nikki');
 
-        s = m.section(form.NamedSection, 'status', 'status', _('<p><strong>📣 Status</strong></p>'));
+        s = m.section(form.TableSection, 'status', _('<p><strong>📣 Status</strong></p>'));
+        s.anonymous = true;
 
         o = s.option(form.Value, '_app_version', _('🔹App Version'));
         o.readonly = true;
@@ -63,28 +64,28 @@ return view.extend({
             });
         });
 
-        o = s.option(form.Button, 'reload', '-');
+        o = s.option(form.Button, 'reload');
         o.inputstyle = 'action';
         o.inputtitle = _('⟳ Reload Service');
         o.onclick = function () {
             return nikki.reload();
         };
 
-        o = s.option(form.Button, 'restart', '-');
+        o = s.option(form.Button, 'restart');
         o.inputstyle = 'negative';
         o.inputtitle = _('⟳ Restart Service');
         o.onclick = function () {
             return nikki.restart();
         };
 
-        o = s.option(form.Button, 'update_dashboard', '-');
+        o = s.option(form.Button, 'update_dashboard');
         o.inputstyle = 'positive';
         o.inputtitle = _('📤 Update Dashboard');
         o.onclick = function () {
             return nikki.updateDashboard();
         };
 
-        o = s.option(form.Button, 'open_dashboard', '-');
+        o = s.option(form.Button, 'open_dashboard');
         o.inputtitle = _('👾 Open Dashboard');
         o.onclick = function () {
             return nikki.openDashboard();
