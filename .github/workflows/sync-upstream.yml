@@ -1,0 +1,36 @@
+name: Sync upstream repo
+
+on:
+  schedule:
+    - cron: '15 1 * * *'   # Setiap hari jam 01:15 UTC (bisa kamu ubah sesuai kebutuhan)
+  workflow_dispatch:       # Bisa juga dijalankan manual lewat Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream and fetch
+        run: |
+          git remote add upstream https://github.com/nikkinikki-org/OpenWrt-nikki.git
+          git fetch upstream
+
+      - name: Merge upstream/main into main
+        run: |
+          git checkout main
+          git merge --no-edit upstream/main || true
+
+      - name: Push changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin main || true
